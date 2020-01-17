@@ -8,7 +8,7 @@ namespace APIFoodPlanner.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index() 
         {
             ViewBag.Title = "Home Page";
 
