@@ -29,18 +29,35 @@ namespace APIFoodPlanner.Controllers
         {
             using (var context = new RecipeContext())
             {
-
-               
-            
-                //var dd = context.Recipe.Include(x => x.Ingredients).Take(1).FirstOrDefault();
                 var customers = context.Recipe.Include("Ingredients.Measure").Include("Ingredients.Food").ToList();
-                /*var hierarchy = from p in context.Recipe
-                    .Include(p => p.Ingredients.Select(c => c.Ingredient)).ToList()
-                                select p;*/
-                return customers.Take(1).FirstOrDefault();
+                return customers.Where(i => i.Id == id).FirstOrDefault();
             };
-
+        }
+        // POST api/recipies
+        public void post(Recipe recipe)
+        {
+            using (var context = new RecipeContext())
+            {
+                context.Recipe.Add(recipe);
+                context.SaveChanges();
+            };
           
+        }
+
+        // PUT api/recipies/5
+        public void Put(Recipe recipe)
+        {
+            using (var context = new RecipeContext())
+            {
+                context.Recipe.Update(recipe);
+                context.SaveChanges();
+            };
+        }
+
+        // DELETE api/values/5
+        public void Delete(int id)
+        {
+           //To do: Handle delete
         }
 
     }
